@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Contact Cloud</title>
+    <script defer src="js/contactlist.js"></script>
+    <!-- Link script with 'defer' -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Tailwind -->
+  </head>
+  <body class="flex bg-blue-100">
+    <!-- Sidebar -->
+    <div
+      class="w-1/5 h-screen bg-indigo-900 text-white p-4 flex flex-col items-center text-center"
+    >
+      <h1 class="text-3xl font-bold">
+        Welcome <br />
+        "user"
+      </h1>
+      <nav class="mt-4 w-full">
+        <ul class="w-full">
+          <li class="py-3">
+            <a href="#" class="hover:underline block text-3xl">Contacts</a>
+          </li>
+          <li class="py-3">
+            <a href="#" class="hover:underline block text-3xl">Logout</a>
+          </li>
+        </ul>
+      </nav>
+
+      <h2 class="mt-6 text-2xl font-semibold">Add new contact</h2>
+      <div class="mt-3 space-y-2 w-full flex flex-col items-center">
+        <input
+          type="text"
+          id="firstName"
+          placeholder="Enter first name"
+          class="w-4/5 p-1 text-black rounded text-center"
+        />
+        <input
+          type="text"
+          id="lastName"
+          placeholder="Enter last name"
+          class="w-4/5 p-1 text-black rounded text-center"
+        />
+        <input
+          type="text"
+          id="email"
+          placeholder="Enter email"
+          class="w-4/5 p-1 text-black rounded text-center"
+        />
+        <input
+          type="text"
+          id="phone"
+          placeholder="Enter phone number"
+          class="w-4/5 p-1 text-black rounded text-center"
+        />
+        <button
+          onclick="addContact()"
+          class="bg-blue-600 w-4/5 p-2 rounded text-white text-sm"
+        >
+          + Add Contact
+        </button>
+      </div>
+    </div>
+
+    <!-- Main Content -->
+    <div class="flex-1 p-6">
+      <h1
+        class="text-5xl font-bold text-indigo-900 text-center flex justify-center items-center gap-2"
+      >
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke-width="1.5"
+          stroke="currentColor"
+          class="w-12 h-12"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            d="M19.5 18a3 3 0 100-6 4.5 4.5 0 00-8.6-2A5.25 5.25 0 003 14.25 3.75 3.75 0 006.75 18h12.75z"
+          />
+        </svg>
+        Contact Cloud
+      </h1>
+
+      <!-- Search Bar -->
+      <!-- Search Bar -->
+      <div class="mt-6 flex justify-center">
+        <input
+          type="text"
+          id="search"
+          placeholder="search"
+          class="p-2 border rounded w-1/2"
+          onkeyup="searchContacts()"
+        />
+      </div>
+      <!-- Contacts Table -->
+      <table
+        class="bg-white w-full mt-4 border-collapse border border-gray-400"
+        id="contactsTable"
+      >
+        <thead>
+          <tr class="bg-indigo-900 text-white">
+            <th class="border p-2">First Name</th>
+            <th class="border p-2">Last Name</th>
+            <th class="border p-2">Email</th>
+            <th class="border p-2">Phone Number</th>
+            <th class="border p-2">Edit/Delete</th>
+          </tr>
+        </thead>
+        <tbody>
+          <!-- Contact rows will be added here -->
+        </tbody>
+      </table>
+    </div>
+  </body>
+</html>
