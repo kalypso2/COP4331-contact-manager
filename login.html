@@ -5,6 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Contact Manager Login</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <script type="text/javascript" src="js/md5.js"></script>
+	  <script type="text/javascript" src="js/code.js"></script>
   </head>
   <body class="bg-blue-100 flex items-center justify-center h-screen">
     <div class="bg-white shadow-md rounded-lg p-8 max-w-sm w-full">
@@ -28,7 +30,10 @@
           </svg>
           Contact Cloud
         </h1>
-      <form>
+      <form
+      class ="group"
+      novalidate
+      >
         <div class="mb-4">
           <label for="username" class="block text-sm font-medium text-gray-700"
             >Username</label
@@ -37,8 +42,13 @@
             type="text"
             id="username"
             placeholder="Enter username here"
-            class="mt-1 w-full px-3 py-2 border border-blue-300 rounded-lg shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500"
-          />
+            class="mt-1 w-full px-3 py-2 border border-blue-300 rounded-lg shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 invalid:[&:not(:placeholder-shown):not(:focus)]:border-red-500 peer"
+            required
+            pattern = "(?=.*[a-zA-Z]).{1,}"
+            />
+            <span class="mt-2 hidden text-sm text-red-500 peer-[&:not(:placeholder-shown):not(:focus):invalid]:block">
+              Please enter a valid username
+            </span>
         </div>
         <div class="mb-6">
           <label for="password" class="block text-sm font-medium text-gray-700"
@@ -48,19 +58,26 @@
             type="password"
             id="password"
             placeholder="Enter password here"
-            class="mt-1 w-full px-3 py-2 border border-blue-300 rounded-lg shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500"
-          />
+            class="mt-1 w-full px-3 py-2 border border-blue-300 rounded-lg shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 invalid:[&:not(:placeholder-shown):not(:focus)]:border-red-500 peer"
+            required
+            pattern = "[^ ]{1,}"
+            />
+            <span class="mt-2 hidden text-sm text-red-500 peer-[&:not(:placeholder-shown):not(:focus):invalid]:block">
+              Please enter a password
+            </span>
         </div>
         <button
           type="submit"
-          class="w-full bg-blue-800 text-white py-2 px-4 rounded-lg hover:bg-blue-900 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-1"
-        >
+          class="w-full bg-blue-800 text-white py-2 px-4 rounded-lg hover:bg-blue-900 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-1 group-invalid:pointer-events-none group-invalid:opacity-50"
+          onclick = "doLogin();"
+          >
+        
           Log In
         </button>
       </form>
       <p class="text-sm text-center text-gray-600 mt-4">
         Don’t have an account yet?
-        <a href="#" class="text-blue-700 font-medium hover:underline"
+        <a href="signup.html" class="text-blue-700 font-medium hover:underline"
           >Sign Up</a
         >
       </p>
