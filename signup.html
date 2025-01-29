@@ -29,17 +29,25 @@
           </svg>
           Contact Cloud
         </h1>
-      <form>
+      <form
+      class ="group"
+      novalidate
+      >
         <div class="mb-2">
             <label for="firstName" class="block text-sm font-medium text-gray-700"
-              >First Name</label
-            >
+              >First Name </label>  
             <input
               type="text"
               id="firstName"
               placeholder="Enter your first name here"
-              class="mt-1 w-full px-3 py-2 border border-blue-300 rounded-lg shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500"
-            />
+              class="mt-1 w-full px-3 py-2 border border-blue-300 rounded-lg shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 invalid:[&:not(:placeholder-shown):not(:focus)]:border-red-500 peer"
+              required
+              pattern="[a-zA-Z]{1,}"
+              />
+              <span class="mt-2 hidden text-sm text-red-500 peer-[&:not(:placeholder-shown):not(:focus):invalid]:block">
+                Names can only contain letters
+              </span>
+             
           </div>
           <div class="mb-2">
             <label for="lastName" class="block text-sm font-medium text-gray-700"
@@ -49,20 +57,32 @@
               type="text"
               id="lastName"
               placeholder="Enter your last name here"
-              class="mt-1 w-full px-3 py-2 border border-blue-300 rounded-lg shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500"
-            />
+              class="mt-1 w-full px-3 py-2 border border-blue-300 rounded-lg shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 invalid:[&:not(:placeholder-shown):not(:focus)]:border-red-500 peer"
+              required
+              pattern="[a-zA-Z]{1,}"
+              />
+              <span class="mt-2 hidden text-sm text-red-500 peer-[&:not(:placeholder-shown):not(:focus):invalid]:block">
+                Names can only contain letters
+              </span>
+                  
           </div>
-        <div class="mb-2">
-          <label for="username" class="block text-sm font-medium text-gray-700"
-            >Username</label
-          >
-          <input
-            type="text"
-            id="username"
-            placeholder="Enter username here"
-            class="mt-1 w-full px-3 py-2 border border-blue-300 rounded-lg shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500"
-          />
-        </div>
+          <div class="mb-2">
+            <label for="username" class="block text-sm font-medium text-gray-700"
+              >Username</label
+            >
+            <input
+              type="text"
+              id="username"
+              placeholder="Enter username here"
+              class="mt-1 w-full px-3 py-2 border border-blue-300 rounded-lg shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 invalid:[&:not(:placeholder-shown):not(:focus)]:border-red-500 peer"
+              required
+              pattern="(?=.*[a-zA-Z]).{1,}"
+              />
+              <span class="mt-2 hidden text-sm text-red-500 peer-[&:not(:placeholder-shown):not(:focus):invalid]:block">
+                Usernames must contain at least 1 letter
+              </span>
+                  
+          </div>
         <div class="mb-8">
           <label for="password" class="block text-sm font-medium text-gray-700"
             >Password</label
@@ -71,14 +91,19 @@
             type="password"
             id="password"
             placeholder="Enter password here"
-            class="mt-1 w-full px-3 py-2 border border-blue-300 rounded-lg shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500"
-          />
+            class="mt-1 w-full px-3 py-2 border border-blue-300 rounded-lg shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 invalid:[&:not(:placeholder-shown):not(:focus)]:border-red-500 peer"
+            required
+            pattern = ".{8,}"
+            />
+              <span class="mt-2 hidden text-sm text-red-500 peer-[&:not(:placeholder-shown):not(:focus):invalid]:block">
+                Passwords must contain at least 8 characters
+              </span>
         </div>
         <button
           type="submit"
           id = "signupButton"
           onclick = "doSignUp();"
-          class="w-full bg-blue-800 text-white py-2 px-4 rounded-lg hover:bg-blue-900 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-1"
+          class="w-full bg-blue-800 text-white py-2 px-4 rounded-lg hover:bg-blue-900 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-1group-invalid:pointer-events-none group-invalid:opacity-50"
         >
           Sign Up
         </button>
