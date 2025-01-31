@@ -79,7 +79,16 @@ function doLogin() {
         document.getElementById("loginResult").innerHTML = err.message;
     }
 }
-
+function checkPassword() 
+{
+	var input = document.getElementById('passwordVerify');
+        if (input.value != document.getElementById('password').value) {
+          	document.getElementById("passwordVerify").setCustomValidity("Passwords must match.");
+    	} else {
+		// passwords match
+		document.getElementById("passwordVerify").setCustomValidity("");
+	    	}
+}
 
 function doSignUp()
 {
