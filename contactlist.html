@@ -4,10 +4,18 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Contact Cloud</title>
-    <script defer src="js/contactlist.js"></script>
+    <script defer src="js/code.js"></script>
     <!-- Link script with 'defer' -->
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- Tailwind -->
+    
+    <!-- Reads the cookies -->
+    <script type="text/javascript">
+		document.addEventListener('DOMContentLoaded', function () {
+			readCookie();
+			loadContacts();
+		}, false);
+	  </script>
   </head>
   <body class="flex bg-blue-100">
     <!-- Sidebar -->
@@ -15,53 +23,58 @@
       class="w-1/5 h-screen bg-indigo-900 text-white p-4 flex flex-col items-center text-center"
     >
       <h1 class="text-3xl font-bold">
-        Welcome <br />
-        "user"
+        <div>
+          Welcome, <br/>
+          <span id="userName">
+          </span>
+        </div>
       </h1>
       <nav class="mt-4 w-full">
         <ul class="w-full">
           <li class="py-3">
-            <a href="#" class="hover:underline block text-3xl">Contacts</a>
+            <a href="#" class="hover:underline block text-3xl" onclick="doAllContacts()" >All contacts</a>
           </li>
           <li class="py-3">
-            <a href="#" class="hover:underline block text-3xl">Logout</a>
+            <a href="#" class="hover:underline block text-3xl" onclick="doLogout()" >Logout</a>
           </li>
         </ul>
       </nav>
 
       <h2 class="mt-6 text-2xl font-semibold">Add new contact</h2>
-      <div class="mt-3 space-y-2 w-full flex flex-col items-center">
+      <form id = "addMe" class="mt-3 space-y-2 w-full flex flex-col items-center">
         <input
           type="text"
-          id="firstName"
+          id="contactTextFirst"
           placeholder="Enter first name"
           class="w-4/5 p-1 text-black rounded text-center"
         />
         <input
           type="text"
-          id="lastName"
+          id="contactTextLast"
           placeholder="Enter last name"
           class="w-4/5 p-1 text-black rounded text-center"
         />
         <input
           type="text"
-          id="email"
+          id="contactTextEmail"
           placeholder="Enter email"
           class="w-4/5 p-1 text-black rounded text-center"
         />
         <input
           type="text"
-          id="phone"
+          id="contactTextNumber"
           placeholder="Enter phone number"
           class="w-4/5 p-1 text-black rounded text-center"
         />
         <button
+          id = "addMe"
+          type = "button"
           onclick="addContact()"
           class="bg-blue-600 w-4/5 p-2 rounded text-white text-sm"
         >
           + Add Contact
         </button>
-      </div>
+      </form>
     </div>
 
     <!-- Main Content -->
@@ -91,7 +104,7 @@
       <div class="mt-6 flex justify-center">
         <input
           type="text"
-          id="search"
+          id="searchText"
           placeholder="search"
           class="p-2 border rounded w-1/2"
           onkeyup="searchContacts()"
@@ -99,11 +112,11 @@
       </div>
       <!-- Contacts Table -->
       <table
-        class="bg-white w-full mt-4 border-collapse border border-gray-400"
-        id="contactsTable"
+        class="bg-white w-full mt-4 border-collapse border border-gray-400 table-fit"
+        id="contacts"
       >
         <thead>
-          <tr class="bg-indigo-900 text-white">
+          <tr class="bg-indigo-900 text-white" id = "tr">
             <th class="border p-2">First Name</th>
             <th class="border p-2">Last Name</th>
             <th class="border p-2">Email</th>
@@ -111,8 +124,7 @@
             <th class="border p-2">Edit/Delete</th>
           </tr>
         </thead>
-        <tbody>
-          <!-- Contact rows will be added here -->
+        <tbody id = "tbody">
         </tbody>
       </table>
     </div>

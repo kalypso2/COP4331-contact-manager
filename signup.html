@@ -31,7 +31,6 @@
         </h1>
       <form
       class ="group"
-      novalidate
       >
         <div class="mb-2">
             <label for="firstName" class="block text-sm font-medium text-gray-700"
@@ -93,14 +92,15 @@
             placeholder="Enter password here"
             class="mt-1 w-full px-3 py-2 border border-blue-300 rounded-lg shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 invalid:[&:not(:placeholder-shown):not(:focus)]:border-red-500 peer"
             required
-            pattern = ".{8,}"
-            />
+            pattern = "(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"
+	   />
               <span class="mt-2 hidden text-sm text-red-500 peer-[&:not(:placeholder-shown):not(:focus):invalid]:block">
-                Passwords must contain at least 8 characters
+                Passwords must be at leat 8 characters long and contain at least one uppercase letter, 1 lowercase letter, and 1 number
               </span>
         </div>
         <button
           type="submit"
+	  [disabled]= form.invalid
           id = "signupButton"
           onclick = "doSignUp();"
           class="w-full bg-blue-800 text-white py-2 px-4 rounded-lg hover:bg-blue-900 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-1group-invalid:pointer-events-none group-invalid:opacity-50"
@@ -109,7 +109,11 @@
         </button>
         <span id = "signupResult"></span>
       </form>
-     
+     <p class="text-sm text-center text-gray-600 mt-4">
+        Already have an account?
+       <a href="index.html" class="text-blue-700 font-medium hover:underline"
+          >Log In</a>
+      </p>  
     </div>
   </body>
 </html>
