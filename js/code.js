@@ -63,8 +63,10 @@ function doLogin() {
                 console.log(userId);
 
                 if (userId < 1) {
-                    document.getElementById("loginResult").innerHTML = "User/Password combination incorrect";
-                    return;
+                document.getElementById("loginResult").innerHTML = "<span style='color: red;'>User/Password combination incorrect</span>";
+             	document.getElementById("username").style.borderColor = "red"
+             	document.getElementById("password").style.borderColor = "red"
+                return;
                 }
                 firstName = jsonObject.firstName;
                 lastName = jsonObject.lastName;
