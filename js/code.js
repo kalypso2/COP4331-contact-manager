@@ -6,6 +6,10 @@ let firstName = "";
 let lastName = "";
 const ids = []
 
+var contactLength = 25;
+
+const currentUrl = document.URL;
+
 function doLogin() {
     //if (event) event.preventDefault();
     
@@ -123,7 +127,20 @@ function doSignUp()
 				return;
 			}
 			if(this.status == 200){
+<<<<<<< Updated upstream
 				let jsonObject = JSON.parse( xhr.responseText );
+=======
+                let jsonResponce = JSON.parse(xhr.responseText);
+                if (jsonResponce.error) {
+                    if (jsonResponce.error === "Login already exists") {
+                        console.log("Login exists already/fields are invalid");
+                        document.getElementById("signupResult").innerHTML = "Login exists already/fields are invalid";
+                        return;  // Stop further processing
+                    }
+                }
+
+                let jsonObject = JSON.parse( xhr.responseText );
+>>>>>>> Stashed changes
 				userId = jsonObject.id;
 				firstName = jsonObject.firstName;
 				lastName = jsonObject.lastName;
@@ -301,6 +318,18 @@ function validAddContact(firstName, lastName, phone, email) {
 
     var fNameErr = lNameErr = phoneErr = emailErr = true;
 
+<<<<<<< Updated upstream
+=======
+    var firstnameElement = document.getElementById("contactTextFirst");
+    var lastnameElement = document.getElementById("contactTextLast");
+    var phoneElement = document.getElementById("contactTextNumber");
+    var emailElement = document.getElementById("contactTextEmail");
+
+    document.getElementById("addResult").classList.remove('text-green-500');
+    document.getElementById("addResult").classList.add('text-red-500');
+
+
+>>>>>>> Stashed changes
     if (firstName == "") {
         console.log("FIRST NAME IS BLANK");
     }
@@ -356,6 +385,9 @@ function validAddContact(firstName, lastName, phone, email) {
 
     }
 
+    document.getElementById("addResult").classList.remove('text-red-500');
+    document.getElementById("addResult").classList.add('text-green-500');
+    document.getElementById("addResult").innerHTML = "Contact has been added";
     return true;
 
 }
@@ -382,7 +414,10 @@ function loadContacts() {
                     return;
                 }
                 let text = "<table border='1'>"
-                for (let i = 0; i < jsonObject.results.length; i++) {
+                
+                let maxResults = Math.min(jsonObject.results.length, contactLength);
+                
+                for (let i = 0; i < maxResults; i++) {
                     ids[i] = jsonObject.results[i].ID
                     text += "<tr class='border p-2' id='row" + i + "'>"
                     text += "<td class='border p-2' id='first_Name" + i + "'><span>" + jsonObject.results[i].FirstName.trim(); + "</span></td>";
@@ -407,30 +442,59 @@ function loadContacts() {
 }
 
 function searchContacts() {
-    const content = document.getElementById("searchText");
-    const selections = content.value.toUpperCase().split(' ');
-    const table = document.getElementById("contacts");
-    const tr = table.getElementsByTagName("tr");// Table Row
+  let searchValue = document.getElementById("searchText").value.trim();
+  
+  let tmp = {
+      search: searchValue,
+      userId: userId
+  };
 
-    for (let i = 0; i < tr.length; i++) {
-        const td_fn = tr[i].getElementsByTagName("td")[0];// Table Data: First Name
-        const td_ln = tr[i].getElementsByTagName("td")[1];// Table Data: Last Name
+  let jsonPayload = JSON.stringify(tmp);
 
-        if (td_fn && td_ln) {
-            const txtValue_fn = td_fn.textContent || td_fn.innerText;
-            const txtValue_ln = td_ln.textContent || td_ln.innerText;
-            tr[i].style.display = "none";
+  let url = urlBase + '/searchContacts.' + extension;
+  let xhr = new XMLHttpRequest();
+  xhr.open("POST", url, true);
+  xhr.setRequestHeader("Content-type", "application/json; charset=UTF-8");
 
-            for (selection of selections) {
-                if (txtValue_fn.toUpperCase().indexOf(selection) > -1) {
-                    tr[i].style.display = "";
-                }
-                if (txtValue_ln.toUpperCase().indexOf(selection) > -1) {
-                    tr[i].style.display = "";
-                }
-            }
-        }
-    }
+  try {
+      xhr.onreadystatechange = function () {
+          if (this.readyState == 4 && this.status == 200) {
+              let jsonObject = JSON.parse(xhr.responseText);
+              
+              if (jsonObject.error) {
+                  
+                  console.log(jsonObject.error);
+                  document.getElementById("tbody").classList.add("hidden");  
+                  return;
+              }
+
+              document.getElementById("tbody").classList.remove("hidden");
+              let text = "<table border='1'>"
+              
+              let maxResults = Math.min(jsonObject.results.length, contactLength);
+              
+              for (let i = 0; i < maxResults; i++) {
+                  ids[i] = jsonObject.results[i].ID
+                  text += "<tr class='border p-2' id='row" + i + "'>"
+                  text += "<td class='border p-2' id='first_Name" + i + "'><span>" + jsonObject.results[i].FirstName.trim(); + "</span></td>";
+                  text += "<td class='border p-2' id='last_Name" + i + "'><span>" + jsonObject.results[i].LastName.trim(); + "</span></td>";
+                  text += "<td class='border p-2' id='email" + i + "'><span>" + jsonObject.results[i].Email.trim(); + "</span></td>";
+                  text += "<td class='border p-2' id='phone" + i + "'><span>" + jsonObject.results[i].Phone.trim(); + "</span></td>";
+                  text += '<td>' +
+                  '  <button id="edit_button'+ i +'"onclick="edit_row(' + i + ')" class="bg-blue-500 w-20 text-white px-2 py-1 rounded" style="display: inline-block;"> Edit </button>' +
+                  '  <button id="save_button'+ i +'" onclick="save_row(' + i + ')" class="bg-green-500 w-20 text-white px-2 py-1 rounded" style="display: none;">Save</button>' +
+                  '  <button id="delete_button' + i + '"onclick="deleteContact(' + i + ')" class="bg-red-500 w-20 text-white px-2 py-1 rounded style="display: inline-block;"">Delete</button>' +
+                  '</td>';
+                  text += "<tr/>";
+              }
+              text += "</table>"
+              document.getElementById("tbody").innerHTML = text;
+          }
+      };
+      xhr.send(jsonPayload);
+  } catch (err) {
+      console.log(err.message);
+  }
 }
 
 
@@ -528,7 +592,11 @@ function save_row(no) {
         xhr.onreadystatechange = function () {
             if (this.readyState == 4 && this.status == 200) {
                 console.log("Contact has been updated");
-                loadContacts();
+                if(document.getElementById("searchText").value != "")
+                {
+                  document.getElementById("searchText").value = namef_val;
+                  searchContacts();
+                }
             }
         };
         xhr.send(jsonPayload);
@@ -537,10 +605,26 @@ function save_row(no) {
     }
 }
 
-function doAllContacts()
+function doMoreContacts()
 {
+<<<<<<< Updated upstream
     document.getElementById("searchText").value = ""; // Clear the search field
     loadContacts(); // Reload the contacts
+=======
+  contactLength = contactLength+25;
+  console.log(contactLength);  
+  searchContacts(); // Reload the contacts
+}
+
+function doLessContacts()
+{
+  if(contactLength != 25)
+  {
+    contactLength = contactLength-25;  
+  }
+  console.log(contactLength); 
+  searchContacts(); // Reload the contacts
+>>>>>>> Stashed changes
 }
 
 function testFunction()
@@ -550,6 +634,23 @@ function testFunction()
 
 //Add this into the index
 
+<<<<<<< Updated upstream
+=======
+document.getElementById('signupButton').addEventListener('click', function(event) {
+  event.preventDefault();
+  doSignUp();
+});
+
+
+function cloudButton()
+{
+  window.open(
+    'https://github.com/kalypso2/COP4331-contact-manager',
+    '_blank' // <- This is what makes it open in a new window.
+  );
+}
+
+>>>>>>> Stashed changes
 /*
 document.addEventListener("DOMContentLoaded", function() {
     let loginButton = document.getElementById("loginButton");
