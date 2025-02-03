@@ -82,7 +82,7 @@
               </span>
                   
           </div>
-        <div class="mb-8">
+        <div class="mb-2">
           <label for="password" class="block text-sm font-medium text-gray-700"
             >Password</label
           >
@@ -97,6 +97,20 @@
               <span class="mt-2 hidden text-sm text-red-500 peer-[&:not(:placeholder-shown):not(:focus):invalid]:block">
                 Passwords must be at leat 8 characters long and contain at least one uppercase letter, 1 lowercase letter, and 1 number
               </span>
+        </div>
+	<div class="mb-8">
+          <label for="passwordVerify" class="block text-sm font-medium text-gray-700"
+            >Verify Password</label
+          >
+          <input
+            type="password"
+            id="passwordVerify"
+            placeholder="Enter password here"
+            class="mt-1 w-full px-3 py-2 border border-blue-300 rounded-lg shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 invalid:[&:not(:placeholder-shown):not(:focus)]:border-red-500 peer"
+            required
+            oninput = "checkPassword();"
+            />
+              
         </div>
         <button
           type="button"
