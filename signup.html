@@ -98,31 +98,17 @@
                 Passwords must be at leat 8 characters long and contain at least one uppercase letter, 1 lowercase letter, and 1 number
               </span>
         </div>
-	 <div class="mb-8">
-          <label for="passwordVerify" class="block text-sm font-medium text-gray-700"
-            >Verify Password</label
-          >
-          <input
-            type="password"
-            id="passwordVerify"
-            placeholder="Enter password here"
-            class="mt-1 w-full px-3 py-2 border border-blue-300 rounded-lg shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 invalid:[&:not(:placeholder-shown):not(:focus)]:border-red-500 peer"
-            required
-            oninput = "checkPassword()";
-            />
-             <span class="mt-2 hidden text-sm text-red-500 peer-[&:not(:placeholder-shown):not(:focus):invalid]:block">
-              Passwords do not match
-            </span>
-        </div>
         <button
-          type="submit"
+          type="button"
 	  [disabled]= form.invalid
           id = "signupButton"
-          onclick = "doSignUp()";
+          onclick = "doSignUp();"
           class="w-full bg-blue-800 text-white py-2 px-4 rounded-lg hover:bg-blue-900 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-1group-invalid:pointer-events-none group-invalid:opacity-50"
         >
           Sign Up
         </button>
+        <span class="flex items-center justify-center text-red-500 " id="signupResult">
+        </span>
         <span id = "signupResult"></span>
       </form>
      <p class="text-sm text-center text-gray-600 mt-4">

@@ -17,29 +17,38 @@ function doLogin() {
     firstName = "";
     lastName = "";
 
+    let loginElement = document.getElementById("username");
+    let passwordElement = document.getElementById("password");
+    
     let login = document.getElementById("username").value;
     let password = document.getElementById("password").value;
 
-    //var hash = md5(password);
+    var hash = md5(password);
     
     if (!validLoginForm(login, password)) {
         console.log("The login is not valid")
         
             if(login.trim() === "" && password.trim() === "")
             {
-                document.getElementById("loginResult").innerHTML = "Please enter a username and password";
+                document.getElementById("loginResult").innerHTML = "Please enter a username/password";
+                loginElement.classList.add('border-red-500');
+                passwordElement.classList.add('border-red-500');
                 return;
             }
         
         else if(login.trim() === "")
             {
                 document.getElementById("loginResult").innerHTML = "Please enter a username";
+                loginElement.classList.add('border-red-500');
+                passwordElement.classList.remove('border-red-500');
                 return;  
             }
 
         else if(password.trim() === "")
             {
                 document.getElementById("loginResult").innerHTML = "Please enter a password";
+                passwordElement.classList.add('border-red-500');
+                loginElement.classList.remove('border-red-500');
                 return;  
             }
 
@@ -48,8 +57,8 @@ function doLogin() {
     
     //document.getElementById("loginResult").innerHTML = "";
 
-    //let tmp = { login: login, password: hash };
-    let tmp = { login: login, password: password };
+    let tmp = { login: login, password: hash };
+    //let tmp = { login: login, password: password };
 
     let jsonPayload = JSON.stringify(tmp);
 
@@ -67,10 +76,10 @@ function doLogin() {
                 console.log(userId);
 
                 if (userId < 1) {
-                document.getElementById("loginResult").innerHTML = "<span style='color: red;'>User/Password combination incorrect</span>";
-             	document.getElementById("username").style.borderColor = "red"
-             	document.getElementById("password").style.borderColor = "red"
-                return;
+                    document.getElementById("loginResult").innerHTML = "User/Password combination incorrect";
+                    loginElement.classList.add('border-red-500');
+                    passwordElement.classList.add('border-red-500');
+                    return;
                 }
                 firstName = jsonObject.firstName;
                 lastName = jsonObject.lastName;
@@ -85,31 +94,23 @@ function doLogin() {
         document.getElementById("loginResult").innerHTML = err.message;
     }
 }
-function checkPassword() 
-{
-	var input = document.getElementById('passwordVerify');
-        if (input.value != document.getElementById('password').value) {
-          	document.getElementById("passwordVerify").setCustomValidity("Passwords must match.");
-    	} else {
-		// passwords match
-		document.getElementById("passwordVerify").setCustomValidity("");
-	    	}
-}
+
 
 function doSignUp()
 {
-	firstName = document.getElementById("firstName").value;
+    
+    firstName = document.getElementById("firstName").value;
 	lastName = document.getElementById("lastName").value;
 	
 	let login = document.getElementById("username").value;
 	let password = document.getElementById("password").value;
 
     
-//	var hash = md5( password );
+    var hash = md5( password );
 	
 	document.getElementById("signupResult").innerHTML = "";
 
-	let tmp = {firstName:firstName,lastName:lastName,login:login,password:password};
+	let tmp = {firstName:firstName,lastName:lastName,login:login,password:hash};
 
 	let jsonPayload = JSON.stringify( tmp );
 
@@ -127,9 +128,6 @@ function doSignUp()
 				return;
 			}
 			if(this.status == 200){
-<<<<<<< Updated upstream
-				let jsonObject = JSON.parse( xhr.responseText );
-=======
                 let jsonResponce = JSON.parse(xhr.responseText);
                 if (jsonResponce.error) {
                     if (jsonResponce.error === "Login already exists") {
@@ -140,12 +138,13 @@ function doSignUp()
                 }
 
                 let jsonObject = JSON.parse( xhr.responseText );
->>>>>>> Stashed changes
 				userId = jsonObject.id;
 				firstName = jsonObject.firstName;
 				lastName = jsonObject.lastName;
 
-				saveCookie();
+				console.log("Status 200 has been triggered");
+                saveCookie();
+                window.location.href = "index.html";
 			}
 				
 		};
@@ -318,8 +317,6 @@ function validAddContact(firstName, lastName, phone, email) {
 
     var fNameErr = lNameErr = phoneErr = emailErr = true;
 
-<<<<<<< Updated upstream
-=======
     var firstnameElement = document.getElementById("contactTextFirst");
     var lastnameElement = document.getElementById("contactTextLast");
     var phoneElement = document.getElementById("contactTextNumber");
@@ -329,53 +326,68 @@ function validAddContact(firstName, lastName, phone, email) {
     document.getElementById("addResult").classList.add('text-red-500');
 
 
->>>>>>> Stashed changes
     if (firstName == "") {
         console.log("FIRST NAME IS BLANK");
+        firstnameElement.classList.add('border-red-500');
+        document.getElementById("addResult").innerHTML = "Please fill in the empty fields";
     }
     else {
         console.log("first name IS VALID");
+        firstnameElement.classList.remove('border-red-500');
         fNameErr = false;
     }
 
     if (lastName == "") {
         console.log("LAST NAME IS BLANK");
+        lastnameElement.classList.add('border-red-500');
+        document.getElementById("addResult").innerHTML = "Please fill in the empty fields";
     }
     else {
         console.log("LAST name IS VALID");
+        lastnameElement.classList.remove('border-red-500');
         lNameErr = false;
     }
 
     if (phone == "") {
         console.log("PHONE IS BLANK");
+        phoneElement.classList.add('border-red-500');
+        document.getElementById("addResult").innerHTML = "Please fill in the empty fields";
     }
     else {
         var regex = /^[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4}$/;
 
         if (regex.test(phone) == false) {
             console.log("PHONE IS NOT VALID");
+            document.getElementById("addResult").innerHTML = "Please fix invalid fields";
+            phoneElement.classList.add('border-red-500');
         }
 
         else {
 
             console.log("PHONE IS VALID");
+            phoneElement.classList.remove('border-red-500');
             phoneErr = false;
         }
     }
 
     if (email == "") {
         console.log("EMAIL IS BLANK");
+        emailElement.classList.add('border-red-500');
+        document.getElementById("addResult").innerHTML = "Please fill in the empty fields";
     }
     else {
         var regex = /^([a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9_\-\.]+)\.([a-zA-Z]{2,5})$/;
 
         if (regex.test(email) == false) {
             console.log("EMAIL IS NOT VALID");
+            document.getElementById("addResult").innerHTML = "Please fix invalid fields";
+            emailElement.classList.add('border-red-500');
         }
 
         else {
 
             console.log("EMAIL IS VALID");
+            emailElement.classList.remove('border-red-500');
             emailErr = false;
         }
     }
@@ -427,7 +439,7 @@ function loadContacts() {
                     text += '<td>' +
                     '  <button id="edit_button'+ i +'"onclick="edit_row(' + i + ')" class="bg-blue-500 w-20 text-white px-2 py-1 rounded" style="display: inline-block;"> Edit </button>' +
                     '  <button id="save_button'+ i +'" onclick="save_row(' + i + ')" class="bg-green-500 w-20 text-white px-2 py-1 rounded" style="display: none;">Save</button>' +
-                    '  <button onclick="deleteContact(' + i + ')" class="bg-red-500 w-20 text-white px-2 py-1 rounded">Delete</button>' +
+                    '  <button id="delete_button' + i + '"onclick="deleteContact(' + i + ')" class="bg-red-500 w-20 text-white px-2 py-1 rounded style="display: inline-block;"">Delete</button>' +
                     '</td>';
                     text += "<tr/>";
                 }
@@ -537,6 +549,9 @@ function deleteContact(no) {
 }
 
 function edit_row(id) {
+    
+    
+    document.getElementById("delete_button" + id).style.display = "none";  
     document.getElementById("edit_button" + id).style.display = "none";
     document.getElementById("save_button" + id).style.display = "inline-block";
 
@@ -570,6 +585,7 @@ function save_row(no) {
 
     document.getElementById("edit_button" + no).style.display = "inline-block";
     document.getElementById("save_button" + no).style.display = "none";
+    document.getElementById("delete_button" + no).style.display = "inline-block";  
 
     console.log(namef_val);
 
@@ -607,10 +623,6 @@ function save_row(no) {
 
 function doMoreContacts()
 {
-<<<<<<< Updated upstream
-    document.getElementById("searchText").value = ""; // Clear the search field
-    loadContacts(); // Reload the contacts
-=======
   contactLength = contactLength+25;
   console.log(contactLength);  
   searchContacts(); // Reload the contacts
@@ -624,7 +636,6 @@ function doLessContacts()
   }
   console.log(contactLength); 
   searchContacts(); // Reload the contacts
->>>>>>> Stashed changes
 }
 
 function testFunction()
@@ -634,8 +645,6 @@ function testFunction()
 
 //Add this into the index
 
-<<<<<<< Updated upstream
-=======
 document.getElementById('signupButton').addEventListener('click', function(event) {
   event.preventDefault();
   doSignUp();
@@ -650,7 +659,6 @@ function cloudButton()
   );
 }
 
->>>>>>> Stashed changes
 /*
 document.addEventListener("DOMContentLoaded", function() {
     let loginButton = document.getElementById("loginButton");
