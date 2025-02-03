@@ -594,6 +594,14 @@ document.getElementById('signupButton').addEventListener('click', function(event
     doSignUp();
   });
 
+function cloudButton()
+{
+  window.open(
+    'https://github.com/kalypso2/COP4331-contact-manager',
+    '_blank' // <- This is what makes it open in a new window.
+  );
+}
+
 /*
 document.addEventListener("DOMContentLoaded", function() {
     let loginButton = document.getElementById("loginButton");
