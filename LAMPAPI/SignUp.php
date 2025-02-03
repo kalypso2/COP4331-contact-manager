@@ -1,10 +1,6 @@
 <?php
     $inData = getRequestInfo();
 
-    if (!isset($inData["firstName"]) || !isset($inData["lastName"]) || !isset($inData["login"]) || !isset($inData["password"])) {
-        returnWithError("Missing required fields");
-        exit();
-    }
 
     $firstName = $inData["firstName"];
     $lastName = $inData["lastName"];
@@ -19,7 +15,7 @@
     } 
     else
     {
-        $stmt = $conn->prepare("SELECT ID FROM Users WHERE Login=?");
+        $stmt = $conn->prepare("SELECT * FROM Users WHERE Login=?");
         $stmt->bind_param("s", $login);
         $stmt->execute();
         $result = $stmt->get_result();
@@ -64,3 +60,4 @@
         sendResultInfoAsJson($retValue);
     }
 ?>
+
