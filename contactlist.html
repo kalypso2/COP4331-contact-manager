@@ -3,6 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="Contact-manager-website">
     <title>Contact Cloud</title>
     <script defer src="js/code.js"></script>
     <!-- Link script with 'defer' -->
@@ -33,77 +34,81 @@
         </div>
       </h1>
       <nav class="mt-4 w-full">
-        <ul class="w-full">
-          <li class="py-3">
-            <a
-              href="#"
-              class="hover:underline block text-3xl"
-              onclick="doMoreContacts()"
-              >Show Contacts</a
-            >
-          </li>
-          <li class="py-3">
-            <a
-              href="#"
-              class="hover:underline block text-3xl"
-              onclick="doLessContacts()"
-              >Hide Contacts</a
-            >
-          </li>
-          <li class="py-3">
-            <a
-              href="#"
-              class="hover:underline block text-3xl"
-              onclick="doLogout()"
-              >Logout</a
-            >
-          </li>
-        </ul>
+        <ul class="w-full"></ul>
       </nav>
 
       <h2 class="mt-6 text-2xl font-semibold">Add new contact</h2>
       <form id="addMe" class="mt-3 space-y-4 w-full flex flex-col items-center">
-        <div class="w-full">
-          <span class="hidden" id="firstAlert"> &#9888; </span>
+        <!-- First Name Field -->
+        <div class="w-full relative">
+          <!-- Symbol for first name -->
+          <span
+            id="firstSymbol"
+            class="absolute left-3 top-1/2 transform -translate-y-1/2 text-xl hidden"
+            >&#x26A0;</span
+          >
           <input
             type="text"
             id="contactTextFirst"
             placeholder="Enter first name"
-            class="w-4/5 p-1 border border-blue-300 text-center text-black rounded-lg shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 invalid:[&:not(:placeholder-shown):not(:focus)]:border-red-500 peer"
+            class="text-center w-full p-2 border border-blue-300 text-black rounded-lg shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 invalid:[&:not(:placeholder-shown):not(:focus)]:border-red-500 peer"
           />
         </div>
-        <div class="w-full">
-          <span class="hidden" id="lastAlert"> &#9888; </span>
+
+        <!-- Last Name Field -->
+        <div class="w-full relative">
+          <span
+            id="lastSymbol"
+            class="absolute left-3 top-1/2 transform -translate-y-1/2 text-xl hidden"
+            >&#x26A0;;</span
+          >
+          <!-- Symbol for last name -->
           <input
             type="text"
             id="contactTextLast"
             placeholder="Enter last name"
-            class="w-4/5 p-1 border border-blue-300 text-center text-black rounded-lg shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 invalid:[&:not(:placeholder-shown):not(:focus)]:border-red-500 peer"
+            class="text-center w-full p-2 border border-blue-300 text-black rounded-lg shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 invalid:[&:not(:placeholder-shown):not(:focus)]:border-red-500 peer"
           />
         </div>
-        <div class="w-full">
-          <span class="hidden" id="emailAlert"> &#9888; </span>
+
+        <!-- Email Field -->
+        <div class="w-full relative">
+          <span
+            id="emailSymbol"
+            class="absolute left-3 top-1/2 transform -translate-y-1/2 text-xl hidden"
+            >&#x26A0;;</span
+          >
+          <!-- Symbol for email -->
           <input
             type="text"
             id="contactTextEmail"
             placeholder="Name@Email.com"
-            class="w-4/5 p-1 border border-blue-300 text-center text-black rounded-lg shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 invalid:[&:not(:placeholder-shown):not(:focus)]:border-red-500 peer"
+            class="text-center w-full p-2 border border-blue-300 text-black rounded-lg shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 invalid:[&:not(:placeholder-shown):not(:focus)]:border-red-500 peer"
           />
         </div>
-        <div class="w-full">
-          <span class="hidden" id="phoneAlert"> &#9888; </span>
+
+        <!-- Phone Field -->
+        <div class="w-full relative">
+          <span
+            id="phoneSymbol"
+            class="absolute left-3 top-1/2 transform -translate-y-1/2 text-xl hidden"
+            >&#x26A0;;</span
+          >
+          <!-- Symbol for phone -->
           <input
             type="text"
             id="contactTextNumber"
             placeholder="XXX-XXX-XXXX"
-            class="w-4/5 p-1 border border-blue-300 text-center text-black rounded-lg shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 invalid:[&:not(:placeholder-shown):not(:focus)]:border-red-500 peer"
+            class="text-center w-full p-2 border border-blue-300 text-black rounded-lg shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 invalid:[&:not(:placeholder-shown):not(:focus)]:border-red-500 peer"
           />
         </div>
+
+        <!-- Add Contact Button -->
         <button
           id="addMe"
           type="button"
           onclick="addContact()"
-          class="bg-blue-600 w-4/5 p-2 rounded-lg text-white text-sm"
+          class="bg-blue-600 w-full p-2 mt-4 rounded-lg text-white text-sm font-semibold"
         >
           + Add Contact
         </button>
@@ -113,6 +118,14 @@
         id="addResult"
       >
       </span>
+      <div class="p-6 mt-auto">
+        <a
+          href="#"
+          class="bg-blue-600 w-full p-2 mt-4 rounded-lg text-white text-sm font-semibold"
+          onclick="doLogout()"
+          >Logout</a
+        >
+      </div>
     </div>
 
     <!-- Main Content -->
@@ -153,21 +166,40 @@
         />
       </div>
       <!-- Contacts Table -->
-      <table
-        class="bg-white w-full mt-4 border-collapse border border-gray-400 table-fit"
-        id="contacts"
-      >
-        <thead>
-          <tr class="bg-indigo-900 text-white" id="tr">
-            <th class="border p-2 rounded-tl-lg">First Name</th>
-            <th class="border p-2">Last Name</th>
-            <th class="border p-2">Email</th>
-            <th class="border p-2">Phone Number</th>
-            <th class="border p-2 rounded-tr-lg">Edit/Delete</th>
-          </tr>
-        </thead>
-        <tbody id="tbody"></tbody>
-      </table>
+      <div class="overflow-y-auto h-[80vh] overscroll-contain">
+        <table
+          class="bg-white w-full mt-4 border-collapse border border-gray-400 table-fit"
+          id="contacts"
+        >
+          <thead>
+            <tr class="bg-indigo-900 text-white" id="tr">
+              <th class="border p-2 rounded-tl-lg">First Name</th>
+              <th class="border p-2">Last Name</th>
+              <th class="border p-2">Email</th>
+              <th class="border p-2">Phone Number</th>
+              <th class="border p-2 rounded-tr-lg">Edit/Delete</th>
+            </tr>
+          </thead>
+          <tbody id="tbody"></tbody>
+        </table>
+      </div>
     </div>
+    <script>
+      // Add the scroll event listener to the table's parent div
+      document.addEventListener("DOMContentLoaded", function () {
+        const tableDiv = document.querySelector(".overflow-y-auto");
+
+        tableDiv.addEventListener("scroll", function () {
+          // Check if the user has scrolled to the bottom
+          if (
+            tableDiv.scrollHeight - tableDiv.scrollTop ===
+            tableDiv.clientHeight
+          ) {
+            // Call your function when the bottom is reached
+            doMoreContacts();
+          }
+        });
+      });
+    </script>
   </body>
 </html>

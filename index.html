@@ -3,6 +3,10 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Webapp-to-create-add-and-delete-contacts"
+    />
     <title>Contact Manager Login</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script type="text/javascript" src="js/md5.js"></script>
@@ -57,6 +61,31 @@
           transform: translateX(0);
         }
       }
+
+      /* Style to position the warning symbol inside the input */
+      .input-container {
+        position: relative;
+      }
+
+      #firstSymbol {
+        position: absolute;
+        left: 10px; /* Adjust the space from the left edge */
+        top: 50%;
+        transform: translateY(-50%); /* Vertically center the symbol */
+        font-size: 1.25rem;
+      }
+
+      #lastSymbol {
+        position: absolute;
+        left: 10px; /* Adjust the space from the left edge */
+        top: 50%;
+        transform: translateY(-50%); /* Vertically center the symbol */
+        font-size: 1.25rem;
+      }
+
+      input {
+        padding-left: 2.5rem; /* Increase padding to make space for the icon */
+      }
     </style>
   </head>
 
@@ -66,7 +95,7 @@
         <h1
           class="text-3xl font-bold text-indigo-900 text-center flex justify-center items-center gap-4"
         >
-          <button id="cloudButton">
+          <button id="easterEgg" aria-label="easterEggButton">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               fill="none"
@@ -86,38 +115,49 @@
         </h1>
 
         <form class="group" novalidate>
-          <div class="mb-4">
+          <div class="mb-4 relative input-container">
             <label
               for="username"
               class="block text-sm font-medium text-gray-700"
               >Username</label
             >
-            <input
-              type="text"
-              id="username"
-              placeholder="Enter username here"
-              class="mt-1 w-full px-3 py-2 border border-blue-300 rounded-lg shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 invalid:[&:not(:placeholder-shown):not(:focus)]:border-red-500 peer"
-            />
+            <div class="relative flex flex-col justify-center items-stretch">
+              <input
+                type="username"
+                id="username"
+                placeholder="Enter username here"
+                class="mt-1 w-full px-3 py-2 border border-blue-300 rounded-lg shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 invalid:[&:not(:placeholder-shown):not(:focus)]:border-red-500 peer"
+              />
+              <div class="absolute grow right-12">
+                <div id="firstSymbol" class="hidden">&#x26A0;</div>
+              </div>
+            </div>
+            <span class="text-red-500" id="usernameResult"></span>
           </div>
-          <div class="mb-6">
+          <div class="mb-6 relative">
             <label
               for="password"
               class="block text-sm font-medium text-gray-700"
               >Password</label
             >
-            <input
-              type="password"
-              id="password"
-              placeholder="Enter password here"
-              class="mt-1 w-full px-3 py-2 border border-blue-300 rounded-lg shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 invalid:[&:not(:placeholder-shown):not(:focus)]:border-red-500 peer"
-            />
+            <div class="relative flex flex-col justify-center items-stretch">
+              <input
+                type="password"
+                id="password"
+                placeholder="Enter password here"
+                class="mt-1 w-full px-3 py-2 border border-blue-300 rounded-lg shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 invalid:[&:not(:placeholder-shown):not(:focus)]:border-red-500 peer"
+              />
+              <div class="absolute grow right-12">
+                <div id="lastSymbol" class="hidden">&#x26A0;</div>
+              </div>
+            </div>
             <span class="text-red-500" id="passwordResult"></span>
           </div>
 
           <button
             type="button"
             id="loginButton"
-            class="w-full bg-blue-800 text-white py-2 px-4 rounded-lg hover:bg-blue-900 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-1"
+            class="font-semibold w-full bg-blue-800 text-white py-2 px-4 rounded-lg hover:bg-blue-900 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-1"
             onclick="doLogin();"
           >
             Log In
@@ -142,21 +182,21 @@
 
     <script>
       document
-        .querySelector("#cloudButton")
+        .querySelector("#easterEgg")
         .addEventListener("click", function () {
           // Create an SVG for the lightning effect
           const lightningDiv = document.createElement("div");
           lightningDiv.classList.add("lightning-strike");
 
           // Add SVG Lightning Strike inside the div
-          lightningDiv.innerHTML = `
+          lightningDiv.innerHTML = ` 
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="yellow" stroke-width="2" class="w-8 h-16">
             <path stroke-linecap="round" stroke-linejoin="round" d="M13 2L11 12H7l5 7-1 9 7-10h-4L13 2z" />
           </svg>
         `;
 
           // Position it just below the cloud button
-          const cloudButton = document.querySelector("#cloudButton");
+          const cloudButton = document.querySelector("#easterEgg");
           const buttonRect = cloudButton.getBoundingClientRect();
           lightningDiv.style.top = `${
             buttonRect.bottom + window.scrollY + 10

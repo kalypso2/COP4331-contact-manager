@@ -3,86 +3,92 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Webapp-to-create-add-and-delete-contacts"
+    />
     <title>Contact Manager Sign Up</title>
     <script type="text/javascript" src="js/md5.js"></script>
-	  <script type="text/javascript" src="js/code.js"></script>
+    <script type="text/javascript" src="js/code.js"></script>
     <script src="https://cdn.tailwindcss.com"></script>
   </head>
   <body class="bg-blue-100 flex items-center justify-center h-screen">
     <div class="bg-white shadow-md rounded-lg p-8 max-w-sm w-full">
       <h1
-          class="text-3xl font-bold text-indigo-900 text-center flex justify-center items-center gap-4"
-        >
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke-width="1.5"
-            stroke="currentColor"
-            class="w-12 h-12"
-          >
-            <path
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              d="M19.5 18a3 3 0 100-6 4.5 4.5 0 00-8.6-2A5.25 5.25 0 003 14.25 3.75 3.75 0 006.75 18h12.75z"
-            />
-          </svg>
-          Contact Cloud
-        </h1>
-      <form
-      class ="group"
+        class="text-3xl font-bold text-indigo-900 text-center flex justify-center items-center gap-4"
       >
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke-width="1.5"
+          stroke="currentColor"
+          class="w-12 h-12"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            d="M19.5 18a3 3 0 100-6 4.5 4.5 0 00-8.6-2A5.25 5.25 0 003 14.25 3.75 3.75 0 006.75 18h12.75z"
+          />
+        </svg>
+        Contact Cloud
+      </h1>
+      <form class="group">
         <div class="mb-2">
-            <label for="firstName" class="block text-sm font-medium text-gray-700"
-              >First Name </label>  
-            <input
-              type="text"
-              id="firstName"
-              placeholder="Enter your first name here"
-              class="mt-1 w-full px-3 py-2 border border-blue-300 rounded-lg shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 invalid:[&:not(:placeholder-shown):not(:focus)]:border-red-500 peer"
-              required
-              pattern="[a-zA-Z]{1,}"
-              />
-              <span class="mt-2 hidden text-sm text-red-500 peer-[&:not(:placeholder-shown):not(:focus):invalid]:block">
-                Names can only contain letters
-              </span>
-             
-          </div>
-          <div class="mb-2">
-            <label for="lastName" class="block text-sm font-medium text-gray-700"
-              >Last Name</label
-            >
-            <input
-              type="text"
-              id="lastName"
-              placeholder="Enter your last name here"
-              class="mt-1 w-full px-3 py-2 border border-blue-300 rounded-lg shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 invalid:[&:not(:placeholder-shown):not(:focus)]:border-red-500 peer"
-              required
-              pattern="[a-zA-Z]{1,}"
-              />
-              <span class="mt-2 hidden text-sm text-red-500 peer-[&:not(:placeholder-shown):not(:focus):invalid]:block">
-                Names can only contain letters
-              </span>
-                  
-          </div>
-          <div class="mb-2">
-            <label for="username" class="block text-sm font-medium text-gray-700"
-              >Username</label
-            >
-            <input
-              type="text"
-              id="username"
-              placeholder="Enter username here"
-              class="mt-1 w-full px-3 py-2 border border-blue-300 rounded-lg shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 invalid:[&:not(:placeholder-shown):not(:focus)]:border-red-500 peer"
-              required
-              pattern="(?=.*[a-zA-Z]).{1,}"
-              />
-              <span class="mt-2 hidden text-sm text-red-500 peer-[&:not(:placeholder-shown):not(:focus):invalid]:block">
-                Usernames must contain at least 1 letter
-              </span>
-                  
-          </div>
+          <label for="firstName" class="block text-sm font-medium text-gray-700"
+            >First Name
+          </label>
+          <input
+            type="text"
+            id="firstName"
+            placeholder="Enter your first name here"
+            class="mt-1 w-full px-3 py-2 border border-blue-300 rounded-lg shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 invalid:[&:not(:placeholder-shown):not(:focus)]:border-red-500 peer"
+            required
+            pattern="[a-zA-Z]{1,}"
+          />
+          <span
+            class="mt-2 hidden text-sm text-red-500 peer-[&:not(:placeholder-shown):not(:focus):invalid]:block"
+          >
+            Names can only contain letters
+          </span>
+        </div>
         <div class="mb-2">
+          <label for="lastName" class="block text-sm font-medium text-gray-700"
+            >Last Name</label
+          >
+          <input
+            type="text"
+            id="lastName"
+            placeholder="Enter your last name here"
+            class="mt-1 w-full px-3 py-2 border border-blue-300 rounded-lg shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 invalid:[&:not(:placeholder-shown):not(:focus)]:border-red-500 peer"
+            required
+            pattern="[a-zA-Z]{1,}"
+          />
+          <span
+            class="mt-2 hidden text-sm text-red-500 peer-[&:not(:placeholder-shown):not(:focus):invalid]:block"
+          >
+            Names can only contain letters
+          </span>
+        </div>
+        <div class="mb-2">
+          <label for="username" class="block text-sm font-medium text-gray-700"
+            >Username</label
+          >
+          <input
+            type="text"
+            id="username"
+            placeholder="Enter username here"
+            class="mt-1 w-full px-3 py-2 border border-blue-300 rounded-lg shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 invalid:[&:not(:placeholder-shown):not(:focus)]:border-red-500 peer"
+            required
+            pattern="(?=.*[a-zA-Z]).{1,}"
+          />
+          <span
+            class="mt-2 hidden text-sm text-red-500 peer-[&:not(:placeholder-shown):not(:focus):invalid]:block"
+          >
+            Usernames must contain at least 1 letter
+          </span>
+        </div>
+        <div class="mb-8">
           <label for="password" class="block text-sm font-medium text-gray-700"
             >Password</label
           >
@@ -92,44 +98,37 @@
             placeholder="Enter password here"
             class="mt-1 w-full px-3 py-2 border border-blue-300 rounded-lg shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 invalid:[&:not(:placeholder-shown):not(:focus)]:border-red-500 peer"
             required
-            pattern = "(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"
-	   />
-              <span class="mt-2 hidden text-sm text-red-500 peer-[&:not(:placeholder-shown):not(:focus):invalid]:block">
-                Passwords must be at leat 8 characters long and contain at least one uppercase letter, 1 lowercase letter, and 1 number
-              </span>
-        </div>
-	<div class="mb-8">
-          <label for="passwordVerify" class="block text-sm font-medium text-gray-700"
-            >Verify Password</label
+            pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"
+          />
+          <span
+            class="mt-2 hidden text-sm text-red-500 peer-[&:not(:placeholder-shown):not(:focus):invalid]:block"
           >
-          <input
-            type="password"
-            id="passwordVerify"
-            placeholder="Enter password here"
-            class="mt-1 w-full px-3 py-2 border border-blue-300 rounded-lg shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 invalid:[&:not(:placeholder-shown):not(:focus)]:border-red-500 peer"
-            required
-            oninput = "checkPassword();"
-            />
-              
+            Passwords must be at least 8 characters long and contain at least one
+            uppercase letter, 1 lowercase letter, and 1 number
+          </span>
         </div>
         <button
           type="button"
-	  [disabled]= form.invalid
-          id = "signupButton"
-          onclick = "doSignUp();"
-          class="w-full bg-blue-800 text-white py-2 px-4 rounded-lg hover:bg-blue-900 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-1group-invalid:pointer-events-none group-invalid:opacity-50"
+          [disabled]="form.invalid"
+          id="signupButton"
+          onclick="doSignUp();"
+          class="font-semibold w-full bg-blue-800 text-white py-2 px-4 rounded-lg hover:bg-blue-900 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-1"
         >
           Sign Up
         </button>
-        <span class="flex items-center justify-center text-red-500 " id="signupResult">
+        <span
+          class="flex items-center justify-center text-red-500"
+          id="signupResult"
+        >
         </span>
-        <span id = "signupResult"></span>
+        <span id="signupResult"></span>
       </form>
-     <p class="text-sm text-center text-gray-600 mt-4">
+      <p class="text-sm text-center text-gray-600 mt-4">
         Already have an account?
-       <a href="index.html" class="text-blue-700 font-medium hover:underline"
-          >Log In</a>
-      </p>  
+        <a href="index.html" class="text-blue-700 font-medium hover:underline"
+          >Log In</a
+        >
+      </p>
     </div>
   </body>
 </html>
